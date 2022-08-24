@@ -55,11 +55,9 @@ class Comment(models.Model):
     comments = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='comments')
     text = models.TextField()
     like = models.ManyToManyField(get_user_model(), related_name='like', blank=True)
+    dislike = models.ManyToManyField(get_user_model(), related_name='dislike', blank=True)
 
     datetime_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.text
-
-    def total_comment_likes(self):
-        return self.like.count()
